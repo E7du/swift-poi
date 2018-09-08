@@ -13,9 +13,27 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<swift-poi.group>cn.zhucongqi</swift-poi.group>
 		<swift-poi.artifactId>swift-poi</swift-poi.artifactId>
-		<swift-poi.version>0.0.1-SNAPSHOT</swift-poi.version>
+		<swift-poi.version>1.0.0</swift-poi.version>
 	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<modules>
 		<module>swift-poi-excel</module>
 	</modules>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
 </project>
