@@ -114,7 +114,9 @@ public class GenerateContextImpl implements GenerateContext {
     }
 
     private void buildHead(List<List<String>> head, Class<?> clazz) {
-        if (head != null || clazz != null) { headProperty = new HeadProperty(clazz, head); }
+        if (head != null || clazz != null) { 
+        	headProperty = new HeadProperty(clazz, head);
+        }
     }
 
     public void appendHeadToExcel() {

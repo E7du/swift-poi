@@ -27,7 +27,7 @@ public class Sheet {
     /**
      * 表头行数
      */
-    private int headLineMun;
+    private int headLineCnt;
 
     /**
      * sheet序号 从0开始
@@ -60,12 +60,12 @@ public class Sheet {
 
     public Sheet(int sheetNo, int headLineMun) {
         this.sheetNo = sheetNo;
-        this.headLineMun = headLineMun;
+        this.headLineCnt = headLineMun;
     }
 
     public Sheet(int sheetNo, int headLineMun, Class<?> clazz) {
         this.sheetNo = sheetNo;
-        this.headLineMun = headLineMun;
+        this.headLineCnt = headLineMun;
         this.clazz = clazz;
     }
 
@@ -73,9 +73,13 @@ public class Sheet {
                  List<List<String>> head) {
         this.sheetNo = sheetNo;
         this.clazz = clazz;
-        this.headLineMun = headLineMun;
+        this.headLineCnt = headLineMun;
         this.sheetName = sheetName;
         this.head = head;
+    }
+    
+    public Boolean hashHead() {
+    	return this.clazz != null && this.head != null && this.headLineCnt != 0;
     }
 
     public List<List<String>> getHead() {
@@ -92,17 +96,17 @@ public class Sheet {
 
     public void setClazz(Class<?> clazz) {
         this.clazz = clazz;
-        if (headLineMun == 0) {
-            this.headLineMun = 1;
+        if (headLineCnt == 0) {
+            this.headLineCnt = 1;
         }
     }
 
     public int getHeadLineMun() {
-        return headLineMun;
+        return headLineCnt;
     }
 
     public void setHeadLineMun(int headLineMun) {
-        this.headLineMun = headLineMun;
+        this.headLineCnt = headLineMun;
     }
 
     public int getSheetNo() {
@@ -132,7 +136,7 @@ public class Sheet {
     @Override
     public String toString() {
         return "Sheet{" +
-            "headLineMun=" + headLineMun +
+            "headLineCnt=" + headLineCnt +
             ", sheetNo=" + sheetNo +
             ", sheetName='" + sheetName + '\'' +
             ", clazz=" + clazz +
