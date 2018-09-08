@@ -19,6 +19,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 import cn.zhucongqi.excel.consts.SheetConsts;
+import cn.zhucongqi.excel.metadata.Rule;
 import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.metadata.Table;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
@@ -56,6 +57,14 @@ public class Writer {
         builder.init(outputStream, typeEnum, needHead);
     }
 
+    /**
+     * Set rule
+     * @param rule
+     */
+    public void setRule(Rule rule) {
+    	builder.setRule(rule);
+    }
+    
     /**
      * Write Data to Excel. <br/>
      * According to the size of data, generate multiple sheet with default style.<br/>

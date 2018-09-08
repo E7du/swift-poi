@@ -27,14 +27,15 @@ import com.jfinal.plugin.activerecord.Model;
 
 import cn.zhucongqi.excel.kit.TypeKit;
 import cn.zhucongqi.excel.metadata.Column;
-import cn.zhucongqi.excel.metadata.ReadRule;
+import cn.zhucongqi.excel.metadata.Rule;
+import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.read.context.AnalysisContext;
 import cn.zhucongqi.excel.write.exception.GenerateException;
 
 public abstract class JFModelReadListener extends AnalysisEventListener<List<String>> {
 
 	private List<Model<?>> datas;
-	private ReadRule rule;
+	private Rule rule;
 
 	public JFModelReadListener() {
 		this.datas = new ArrayList<Model<?>>();
@@ -48,7 +49,7 @@ public abstract class JFModelReadListener extends AnalysisEventListener<List<Str
 	/**
 	 * Excel Read Rule
 	 */
-	public abstract ReadRule rule();
+	public abstract Rule rule();
 
 	/**
 	 * Read a model
@@ -67,9 +68,9 @@ public abstract class JFModelReadListener extends AnalysisEventListener<List<Str
 		if (null == this.getRule()) {
 			throw (new GenerateException("Please set read rule first."));
 		}
-		Integer currentSheetNo = context.getCurrentSheet().getSheetNo();
+		Sheet sheet = context.getCurrentSheet();
 		Integer currentRow = context.getCurrentRowNum();
-		if (this.getRule().getHasHedaer(currentSheetNo) && currentRow == 0) {
+		if (sheet.hashHead() && currentRow <= sheet.getHeadLineMun()) {
 			return;
 		}
 		
@@ -130,7 +131,7 @@ public abstract class JFModelReadListener extends AnalysisEventListener<List<Str
 		this.readRow(model);
 	}
 	
-	private ReadRule getRule() {
+	private Rule getRule() {
 		if (null == this.rule) {
 			this.rule = this.rule();
 		}

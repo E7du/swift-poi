@@ -18,12 +18,10 @@ package cn.zhucongqi.excel.metadata;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReadRule {
+public class Rule {
 	
     private Map<Integer, Column> columns = new HashMap<Integer, Column>();
 
-	private Map<Integer, Boolean> hasHeader = new HashMap<Integer, Boolean>();
-	
 	/**
 	 * Get columns count
 	 * @return
@@ -57,16 +55,4 @@ public class ReadRule {
 	    	this.columns.put(idx, col);
 		}
     }
-    
-	public void setHasHeader(Integer sheetNo, Boolean hasHeder) {
-		this.hasHeader.put(sheetNo, hasHeder);
-	}
-    
-	public Boolean getHasHedaer(Integer sheetNo) {
-		if (this.hasHeader.containsKey(sheetNo)) {
-			return this.hasHeader.get(sheetNo);
-		}
-		return false;
-	}
-    
 }

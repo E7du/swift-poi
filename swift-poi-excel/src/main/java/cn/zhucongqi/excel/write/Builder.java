@@ -18,6 +18,7 @@ package cn.zhucongqi.excel.write;
 import java.io.OutputStream;
 import java.util.List;
 
+import cn.zhucongqi.excel.metadata.Rule;
 import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.metadata.Table;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
@@ -37,6 +38,12 @@ public interface Builder {
      * @param needHead  是否需要将表头写入Excel
      */
     void init(OutputStream out, ExcelTypeEnum excelType, boolean needHead);
+    
+    /**
+     * Set Rule
+     * @param rule
+     */
+    void setRule(Rule rule);
 
     /**
      * 向Excel增加的内容

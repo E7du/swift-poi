@@ -27,6 +27,7 @@ import com.jfinal.plugin.activerecord.Model;
 
 import cn.zhucongqi.excel.kit.TempFile;
 import cn.zhucongqi.excel.metadata.Column;
+import cn.zhucongqi.excel.metadata.Rule;
 import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.metadata.Table;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
@@ -40,12 +41,17 @@ public class BuilderImpl implements Builder {
 
     private GenerateContext context;
     private OutputStream outputsteam;
+    private Rule rule;
 
     public void init(OutputStream out, ExcelTypeEnum excelType, boolean needHead) {
         //初始化时候创建临时缓存目录，用于规避POI在并发写bug
         TempFile.createPOIFilesDirectory();
         this.outputsteam = out;
         context = new GenerateContextImpl(excelType, needHead);
+    }
+    
+    public void setRule(Rule rule) {
+    	this.rule = rule;
     }
 
     public void addContent(List<?> data) {
@@ -116,11 +122,16 @@ public class BuilderImpl implements Builder {
     }
     
     private void addModelToExcel(Model<?> model, Row row) {
-    	String[] attrs = model._getAttrNames();
+    	if (null == this.rule) {
+			return;
+		}
     	String attr;
     	Object val;
-    	for (int i = 0; i < attrs.length; i++) {
-			attr = attrs[i];
+    	int cnt = this.rule.getColumnsCount();
+    	Column col;
+    	for (int i = 0; i < cnt; i++) {
+    		col = this.rule.getColumn(i);
+			attr = col.getAttr();
 			Cell cell = row.createCell(i);
             cell.setCellStyle(context.getCurrentContentStyle());
             val = model.get(attr);
