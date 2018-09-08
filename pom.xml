@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<swift-poi.group>cn.zhucongqi</swift-poi.group>
 		<swift-poi.artifactId>swift-poi</swift-poi.artifactId>
-		<swift-poi.version>1.0.0</swift-poi.version>
+		<swift-poi.version>1.0.0-SNAPSHOT</swift-poi.version>
 	</properties>
 	<dependencies>
 		<dependency>
