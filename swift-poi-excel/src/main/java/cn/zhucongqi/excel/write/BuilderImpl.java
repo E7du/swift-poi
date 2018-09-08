@@ -122,24 +122,31 @@ public class BuilderImpl implements Builder {
     }
     
     private void addModelToExcel(Model<?> model, Row row) {
-    	if (null == this.rule) {
-			return;
-		}
     	String attr;
-    	Object val;
-    	int cnt = this.rule.getColumnsCount();
-    	Column col;
-    	for (int i = 0; i < cnt; i++) {
-    		col = this.rule.getColumn(i);
-			attr = col.getAttr();
-			Cell cell = row.createCell(i);
-            cell.setCellStyle(context.getCurrentContentStyle());
-            val = model.get(attr);
-            if (null == val) {
-				cell.setCellValue("");
-			} else {
-	            cell.setCellValue(model.get(attr).toString());
+    	if (null != this.rule) {
+    		int cnt = this.rule.getColumnsCount();
+        	Column col;
+        	for (int i = 0; i < cnt; i++) {
+        		col = this.rule.getColumn(i);
+    			attr = col.getAttr();
+				this.addCell(row, i, model.get(attr));
+    		}
+		} else {
+			String[] attrs = model._getAttrNames();
+	    	for (int i = 0; i < attrs.length; i++) {
+				attr = attrs[i];
+				this.addCell(row, i, model.get(attr));
 			}
+		}
+    }
+    
+    private void addCell(Row row, Integer idx, Object value) {
+    	Cell cell = row.createCell(idx);
+        cell.setCellStyle(context.getCurrentContentStyle());
+        if (null == value) {
+			cell.setCellValue("");
+		} else {
+            cell.setCellValue(value.toString());
 		}
     }
 
