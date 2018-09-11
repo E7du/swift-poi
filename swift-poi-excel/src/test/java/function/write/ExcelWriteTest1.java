@@ -51,7 +51,7 @@ public class ExcelWriteTest1 {
             e.printStackTrace();
         }
         try {
-            Writer writer = new Writer(out, ExcelTypeEnum.XLSX, false);
+            Writer writer = new Writer(out, ExcelTypeEnum.XLSX);
 
             //写sheet1  数据全是List<String> 无模型映射关系
             Sheet sheet1 = new Sheet(1, 0);

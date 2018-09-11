@@ -376,7 +376,5 @@ public class SaxAnalyserV03 extends BaseSaxAnalyser implements HSSFListener {
             list.add(new String(str));
         }
         return list;
-
     }
-
 }

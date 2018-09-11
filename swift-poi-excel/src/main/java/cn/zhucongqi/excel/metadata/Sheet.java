@@ -25,14 +25,9 @@ import java.util.List;
 public class Sheet {
 
     /**
-     * 表头行数
-     */
-    private int headLineCnt;
-
-    /**
      * sheet序号 从0开始
      */
-    private int sheetNo;
+    private Integer sheetNo;
 
     /**
      * 名称 可不填
@@ -40,73 +35,42 @@ public class Sheet {
     private String sheetName;
 
     /**
-     * 对用的表头模型
-     */
-    private Class<?> clazz;
-
-    /**
      * 对用的表头层级树,用于clazz不确定时候，动态生成表头
      */
     private List<List<String>> head;
+    
+    private Header header;
 
-    /**
-     *
-     */
     private TableStyle tableStyle;
 
-    public Sheet(int sheetNo) {
+    public Sheet(Integer sheetNo) {
         this.sheetNo = sheetNo;
     }
 
-    public Sheet(int sheetNo, int headLineMun) {
+    public Sheet(Integer sheetNo, Integer headerlineCnt) {
         this.sheetNo = sheetNo;
-        this.headLineCnt = headLineMun;
+        this.header = new Header(headerlineCnt);
     }
 
-    public Sheet(int sheetNo, int headLineMun, Class<?> clazz) {
+    public Sheet(Integer sheetNo, Integer headLineCnt, Class<?> clazz) {
         this.sheetNo = sheetNo;
-        this.headLineCnt = headLineMun;
-        this.clazz = clazz;
+        this.header = new Header(clazz, headLineCnt);
     }
 
-    public Sheet(int sheetNo, int headLineMun, Class<?> clazz, String sheetName,
+    public Sheet(Integer sheetNo, Integer headLineCnt, Class<?> clazz, String sheetName,
                  List<List<String>> head) {
         this.sheetNo = sheetNo;
-        this.clazz = clazz;
-        this.headLineCnt = headLineMun;
         this.sheetName = sheetName;
         this.head = head;
+        this.header = new Header(clazz, headLineCnt);
     }
     
-    public Boolean hashHead() {
-    	return this.clazz != null && this.head != null && this.headLineCnt != 0;
-    }
-
     public List<List<String>> getHead() {
         return head;
     }
 
     public void setHead(List<List<String>> head) {
         this.head = head;
-    }
-
-    public Class<?> getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(Class<?> clazz) {
-        this.clazz = clazz;
-        if (headLineCnt == 0) {
-            this.headLineCnt = 1;
-        }
-    }
-
-    public int getHeadLineMun() {
-        return headLineCnt;
-    }
-
-    public void setHeadLineMun(int headLineMun) {
-        this.headLineCnt = headLineMun;
     }
 
     public int getSheetNo() {
@@ -133,15 +97,40 @@ public class Sheet {
         this.tableStyle = tableStyle;
     }
 
-    @Override
-    public String toString() {
-        return "Sheet{" +
-            "headLineCnt=" + headLineCnt +
-            ", sheetNo=" + sheetNo +
-            ", sheetName='" + sheetName + '\'' +
-            ", clazz=" + clazz +
-            ", head=" + head +
-            ", tableStyle=" + tableStyle +
-            '}';
-    }
+	public Header getHeader() {
+		return header;
+	}
+
+	public void setHeader(Header header) {
+		this.header = header;
+	}
+    
+	public Boolean hasHeader() {
+		return this.header != null;
+	}
+	
+	public void setHeaderLineCnt(Integer headerLineCnt) {
+		this.header.setHeadLineCnt(headerLineCnt);
+	}
+	
+	public Integer getHeaderLineCnt() {
+		if (!this.hasHeader()) {
+			return 0;
+		}
+		return this.header.getHeadLineCnt();
+	}
+	
+	public void setClazz(Class<?> clazz) {
+		this.header.setHeaderClazz(clazz);
+		if (this.header.getHeaderLineCnt() == 0) {
+			this.header.setHeaderLineCnt(1);
+		}
+	}
+	
+	public Class<?> getClazz() {
+		if (!this.hasHeader()) {
+			return null;
+		}
+		return this.header.getHeaderClazz();
+	}
 }

@@ -19,7 +19,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import cn.zhucongqi.excel.metadata.HeadProperty;
+import cn.zhucongqi.excel.metadata.Header;
 import cn.zhucongqi.excel.metadata.Table;
 
 /**
@@ -70,13 +70,7 @@ public interface GenerateContext {
      * 返回表头信息
      * @return 返回表头信息
      */
-    HeadProperty getExcelHeadProperty();
-
-    /**
-     *
-     * @return 是否需要表头
-     */
-    boolean needHead();
+    Header getHeader();
 }
 
 

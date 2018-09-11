@@ -18,7 +18,7 @@ package cn.zhucongqi.excel.read.context;
 import java.io.InputStream;
 import java.util.List;
 
-import cn.zhucongqi.excel.metadata.HeadProperty;
+import cn.zhucongqi.excel.metadata.Header;
 import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.read.event.AnalysisEventListener;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
@@ -106,15 +106,15 @@ public interface AnalysisContext {
      *
      * @return 表头信息
      */
-    HeadProperty getExcelHeadProperty();
+    Header getHeader();
 
     /**
-     * 构建 HeadProperty
+     * 构建 Header
      *
      * @param clazz 自定义model
      * @param headOneRow 表头内容
      */
-    void buildExcelHeadProperty(Class<?> clazz, List<String> headOneRow);
+    void buildHeader(Class<?> clazz, List<String> headOneRow);
 
     /**
      * 是否trim()

@@ -42,19 +42,8 @@ public class Writer {
      * @param typeEnum Excel 03 or 07，recommend use 07.
      */
     public Writer(OutputStream outputStream, ExcelTypeEnum typeEnum) {
-        this(outputStream, typeEnum, true);
-    }
-
-    /**
-     * Build EXCEL
-     *
-     * @param outputStream File out stream
-     * @param typeEnum Excel 03 or 07，recommend use 07.
-     * @param needHead build header or not.
-     */
-    public Writer(OutputStream outputStream, ExcelTypeEnum typeEnum, boolean needHead) {
         builder = new BuilderImpl();
-        builder.init(outputStream, typeEnum, needHead);
+        builder.init(outputStream, typeEnum);
     }
 
     /**

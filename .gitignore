@@ -31,5 +31,5 @@ Thumbs.db
 *.orig
 
 #config
-/conf/
-/bin/
+conf/
+bin/

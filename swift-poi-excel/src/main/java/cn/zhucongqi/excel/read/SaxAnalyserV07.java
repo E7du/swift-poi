@@ -138,7 +138,7 @@ public class SaxAnalyserV07 extends BaseSaxAnalyser {
             try {
                 inputStream.close();
             } catch (IOException e1) {
-                e1.printStackTrace();
+                throw new AnalysisException(e1);
             }
             throw new AnalysisException(e);
         }

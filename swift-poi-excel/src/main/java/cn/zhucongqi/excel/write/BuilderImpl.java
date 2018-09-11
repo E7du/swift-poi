@@ -43,11 +43,11 @@ public class BuilderImpl implements Builder {
     private OutputStream outputsteam;
     private Rule rule;
 
-    public void init(OutputStream out, ExcelTypeEnum excelType, boolean needHead) {
+    public void init(OutputStream out, ExcelTypeEnum excelType) {
         //初始化时候创建临时缓存目录，用于规避POI在并发写bug
         TempFile.createPOIFilesDirectory();
         this.outputsteam = out;
-        context = new GenerateContextImpl(excelType, needHead);
+        context = new GenerateContextImpl(excelType);
     }
     
     public void setRule(Rule rule) {
@@ -60,7 +60,7 @@ public class BuilderImpl implements Builder {
             if (rowNum == 0) {
                 Row row = context.getCurrentSheet().getRow(0);
                 if(row == null) {
-                    if (context.getExcelHeadProperty() == null || !context.needHead()) {
+                    if (context.getHeader() == null) {
                         rowNum = -1;
                     }
                 }
@@ -103,7 +103,7 @@ public class BuilderImpl implements Builder {
 
     private void addOneRowOfDataToExcel(Object oneRowData, Row row) {
         int i = 0;
-        for (Column excelHeadProperty : context.getExcelHeadProperty().getColumns()) {
+        for (Column excelHeadProperty : context.getHeader().getHeaderColumns()) {
             Cell cell = row.createCell(i);
             cell.setCellStyle(context.getCurrentContentStyle());
             String cellValue = null;

@@ -296,9 +296,9 @@ public class Read2007Xlsx {
         InputStream inputStream = FileKit.getInputStream("2007WithModelMultipleSheet.xlsx");
         try {
             Reader reader = new Reader(inputStream, ExcelTypeEnum.XLSX, null,
-                new AnalysisEventListener<Object>() {
+                new AnalysisEventListener<ExcelRowJavaModel>() {
                     @Override
-                    public void invoke(Object object, AnalysisContext context) {
+                    public void invoke(ExcelRowJavaModel object, AnalysisContext context) {
                         ExcelRowJavaModel obj = null;
                         if (context.getCurrentSheet().getSheetNo() == 1) {
                             obj = (ExcelRowJavaModel)object;
@@ -320,11 +320,11 @@ public class Read2007Xlsx {
             System.out.println(sheets);
             for (Sheet sheet : sheets) {
                 if (sheet.getSheetNo() == 1) {
-                    sheet.setHeadLineMun(2);
+                    sheet.setHeaderLineCnt(2);
                     sheet.setClazz(ExcelRowJavaModel.class);
                 }
                 if (sheet.getSheetNo() == 2) {
-                    sheet.setHeadLineMun(1);
+                    sheet.setHeaderLineCnt(1);
                     sheet.setClazz(ExcelRowJavaModel1.class);
                 }
                 reader.read(sheet);
@@ -365,11 +365,11 @@ public class Read2007Xlsx {
             System.out.println(sheets);
             for (Sheet sheet : sheets) {
                 if (sheet.getSheetNo() == 1) {
-                    sheet.setHeadLineMun(2);
+                    sheet.setHeaderLineCnt(2);
                     sheet.setClazz(ExcelRowJavaModel.class);
                 }
                 if (sheet.getSheetNo() == 2) {
-                    sheet.setHeadLineMun(1);
+                    sheet.setHeaderLineCnt(1);
                     sheet.setClazz(ExcelRowJavaModel1.class);
                 }
                 reader.read(sheet);

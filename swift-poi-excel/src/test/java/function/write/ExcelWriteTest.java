@@ -52,7 +52,7 @@ public class ExcelWriteTest {
 
         OutputStream out = new FileOutputStream("/Users/Jobsz/77.xlsx");
         try {
-            Writer writer = new Writer(out, ExcelTypeEnum.XLSX,true);
+            Writer writer = new Writer(out, ExcelTypeEnum.XLSX);
             //写第一个sheet, sheet1  数据全是List<String> 无模型映射关系
             Sheet sheet1 = new Sheet(1, 0);
             sheet1.setSheetName("第一个sheet");
@@ -97,7 +97,7 @@ public class ExcelWriteTest {
     public void test2() throws FileNotFoundException {
         OutputStream out = new FileOutputStream("/Users/Jobsz/77.xlsx");
         try {
-            Writer writer = new Writer(out, ExcelTypeEnum.XLSX,false);
+            Writer writer = new Writer(out, ExcelTypeEnum.XLSX);
 
             //写sheet1  数据全是List<String> 无模型映射关系
             Sheet sheet1 = new Sheet(1, 0);

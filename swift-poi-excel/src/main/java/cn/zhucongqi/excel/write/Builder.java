@@ -35,9 +35,8 @@ public interface Builder {
      *
      * @param out       文件输出流
      * @param excelType 输出Excel类型，建议使用07版xlsx（性能，内存消耗，cpu使用都远低于03版xls）
-     * @param needHead  是否需要将表头写入Excel
      */
-    void init(OutputStream out, ExcelTypeEnum excelType, boolean needHead);
+    void init(OutputStream out, ExcelTypeEnum excelType);
     
     /**
      * Set Rule

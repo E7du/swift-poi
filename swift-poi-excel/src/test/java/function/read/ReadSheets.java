@@ -45,14 +45,14 @@ public class ReadSheets {
             ExcelListener listener = new ExcelListener();
             listener.setSheet(new Sheet(1));
            
-            Writer writer = new Writer(new FileOutputStream("./src/test/resources/2007_write.xlsx"), ExcelTypeEnum.XLSX, true);
+            Writer writer = new Writer(new FileOutputStream("./src/test/resources/2007_write.xlsx"), ExcelTypeEnum.XLSX);
             listener.setWriter(writer);
            
             Reader reader = new Reader(inputStream, ExcelTypeEnum.XLSX, null, listener);
             List<Sheet> sheets = reader.getSheets();
             System.out.println(sheets);
             for (Sheet sheet:sheets) {
-                sheet.setHeadLineMun(1);
+                sheet.setHeaderLineCnt(1);
                 reader.read(sheet);
             }
          // reader.read(new Sheet(1));
@@ -80,7 +80,7 @@ public class ReadSheets {
             List<Sheet> sheets = reader.getSheets();
             System.out.println(sheets);
             for (Sheet sheet:sheets) {
-                sheet.setHeadLineMun(1);
+                sheet.setHeaderLineCnt(1);
                 reader.read(sheet);
             }
         } catch (Exception e) {

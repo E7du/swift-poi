@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.zhucongqi.excel.metadata.HeadProperty;
+import cn.zhucongqi.excel.metadata.Header;
 import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.read.event.AnalysisEventListener;
 import cn.zhucongqi.excel.read.exception.AnalysisException;
@@ -46,7 +46,7 @@ public class AnalysisContextImpl implements AnalysisContext {
 
     private Integer totalCount;
 
-    private HeadProperty headProperty;
+    private Header header;
 
     private boolean trim;
 
@@ -87,7 +87,7 @@ public class AnalysisContextImpl implements AnalysisContext {
     public void setCurrentSheet(Sheet currentSheet) {
         this.currentSheet = currentSheet;
         if (currentSheet.getClazz() != null) {
-            buildExcelHeadProperty(currentSheet.getClazz(), null);
+            buildHeader(currentSheet.getClazz(), null);
         }
     }
 
@@ -143,16 +143,16 @@ public class AnalysisContextImpl implements AnalysisContext {
         this.totalCount = totalCount;
     }
 
-    public HeadProperty getExcelHeadProperty() {
-        return this.headProperty;
+    public Header getHeader() {
+        return this.header;
     }
 
-    public void buildExcelHeadProperty(Class<?> clazz, List<String> headOneRow) {
-        if (this.headProperty == null && (clazz != null || headOneRow != null)) {
-            this.headProperty = new HeadProperty(clazz, new ArrayList<List<String>>());
+    public void buildHeader(Class<?> clazz, List<String> headOneRow) {
+        if (this.header == null && (clazz != null || headOneRow != null)) {
+            this.header = new Header(clazz, new ArrayList<List<String>>());
         }
-        if (this.headProperty.getHead() == null && headOneRow != null) {
-            this.headProperty.appendOneRow(headOneRow);
+        if (this.header.getHeaderTitles() == null && headOneRow != null) {
+            this.header.appendOneHeaderRow(headOneRow);
         }
     }
 

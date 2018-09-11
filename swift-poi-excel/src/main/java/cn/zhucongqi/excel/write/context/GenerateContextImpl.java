@@ -35,7 +35,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import cn.zhucongqi.excel.metadata.CellRange;
-import cn.zhucongqi.excel.metadata.HeadProperty;
+import cn.zhucongqi.excel.metadata.Header;
 import cn.zhucongqi.excel.metadata.Table;
 import cn.zhucongqi.excel.metadata.TableStyle;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
@@ -65,18 +65,15 @@ public class GenerateContextImpl implements GenerateContext {
 
     private CellStyle currentContentCellStyle;
 
-    private HeadProperty headProperty;
+    private Header header;
 
-    private boolean needHead = true;
-
-    public GenerateContextImpl(ExcelTypeEnum excelType, boolean needHead) {
+    public GenerateContextImpl(ExcelTypeEnum excelType) {
         if (ExcelTypeEnum.XLS.equals(excelType)) {
             this.workbook = new HSSFWorkbook();
         } else {
             this.workbook = new SXSSFWorkbook(500);
         }
         this.defaultCellStyle = buildDefaultCellStyle();
-        this.needHead = needHead;
     }
 
     private CellStyle buildDefaultCellStyle() {
@@ -105,23 +102,23 @@ public class GenerateContextImpl implements GenerateContext {
                 sheet.getSheetName() != null ? sheet.getSheetName() : sheet.getSheetNo() + "");
             this.currentSheet.setDefaultColumnWidth(20);
             sheetMap.put(sheet.getSheetNo(), this.currentSheet);
-            buildHead(sheet.getHead(), sheet.getClazz());
+            buildHeader(sheet.getHead(), sheet.getClazz());
             buildTableStyle(sheet.getTableStyle());
-            if (needHead && headProperty != null) {
+            if (header != null) {
                 appendHeadToExcel();
             }
         }
     }
 
-    private void buildHead(List<List<String>> head, Class<?> clazz) {
+    private void buildHeader(List<List<String>> head, Class<?> clazz) {
         if (head != null || clazz != null) { 
-        	headProperty = new HeadProperty(clazz, head);
+        	header = new Header(clazz, head);
         }
     }
 
     public void appendHeadToExcel() {
-        if (this.headProperty.getHead() != null && this.headProperty.getHead().size() > 0) {
-            List<CellRange> list = this.headProperty.getCellRangeModels();
+        if (this.header.hasHeaderTitles()) {
+            List<CellRange> list = this.header.getCellRangeModels();
             int n = currentSheet.getLastRowNum();
             if (n > 0) {
                 n = n + 4;
@@ -133,9 +130,9 @@ public class GenerateContextImpl implements GenerateContext {
                 currentSheet.addMergedRegion(cra);
             }
             int i = n;
-            for (; i < this.headProperty.getRowNum() + n; i++) {
+            for (; i < this.header.getRowNum() + n; i++) {
                 Row row = currentSheet.createRow(i);
-                addOneRowOfHeadDataToExcel(row, this.headProperty.getHeadByRowNum(i - n));
+                addOneRowOfHeadDataToExcel(row, this.header.getHeadByRowNum(i - n));
             }
         }
     }
@@ -181,21 +178,17 @@ public class GenerateContextImpl implements GenerateContext {
 
     public void buildTable(Table table) {
         if (!tableMap.containsKey(table.getTableNo())) {
-            buildHead(table.getHead(), table.getClazz());
+            buildHeader(table.getHead(), table.getClazz());
             tableMap.put(table.getTableNo(), table);
             buildTableStyle(table.getTableStyle());
-            if (needHead && headProperty != null) {
+            if (header != null) {
                 appendHeadToExcel();
             }
         }
     }
 
-    public HeadProperty getExcelHeadProperty() {
-        return this.headProperty;
-    }
-
-    public boolean needHead() {
-        return this.needHead;
+    public Header getHeader() {
+        return this.header;
     }
 
     public Sheet getCurrentSheet() {

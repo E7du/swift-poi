@@ -45,13 +45,13 @@ public class Read2007MeanWhileWrite {
         try {
             Excel2007NoJavaModelAnalysisListener listener = new Excel2007NoJavaModelAnalysisListener();
             Writer writer = new Writer(new FileOutputStream("./src/test/resources/77.xlsx"),
-                ExcelTypeEnum.XLSX, false);
+                ExcelTypeEnum.XLSX);
             listener.setExcelWriter(writer);
             Reader reader = new Reader(inputStream, ExcelTypeEnum.XLSX, null, listener);
             List<Sheet> sheets = reader.getSheets();
             System.out.println(sheets);
             for (Sheet sheet : sheets) {
-                sheet.setHeadLineMun(1);
+                sheet.setHeaderLineCnt(1);
                 reader.read(sheet);
             }
             writer.finish();
@@ -73,18 +73,18 @@ public class Read2007MeanWhileWrite {
         try {
             Excel2007WithJavaModelAnalysisListener listener = new Excel2007WithJavaModelAnalysisListener();
             Writer writer = new Writer(new FileOutputStream("./src/test/resources/78_withmodel.xlsx"),
-                ExcelTypeEnum.XLSX, true);
+                ExcelTypeEnum.XLSX);
             listener.setExcelWriter(writer);
             Reader reader = new Reader(inputStream, ExcelTypeEnum.XLSX, null, listener);
             List<Sheet> sheets = reader.getSheets();
             for (Sheet sheet : sheets) {
-                sheet.setHeadLineMun(1);
+                sheet.setHeaderLineCnt(1);
                 if (sheet.getSheetNo() == 1) {
-                    sheet.setHeadLineMun(2);
+                    sheet.setHeaderLineCnt(2);
                     sheet.setClazz(ExcelRowJavaModel.class);
                 }
                 if (sheet.getSheetNo() == 2) {
-                    sheet.setHeadLineMun(1);
+                    sheet.setHeaderLineCnt(1);
                     sheet.setClazz(ExcelRowJavaModel1.class);
                 }
                 reader.read(sheet);
