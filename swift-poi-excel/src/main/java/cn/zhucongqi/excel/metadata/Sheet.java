@@ -34,11 +34,6 @@ public class Sheet {
      */
     private String sheetName;
 
-    /**
-     * 对用的表头层级树,用于clazz不确定时候，动态生成表头
-     */
-    private List<List<String>> head;
-    
     private Header header;
 
     private TableStyle tableStyle;
@@ -58,21 +53,13 @@ public class Sheet {
     }
 
     public Sheet(Integer sheetNo, Integer headLineCnt, Class<?> clazz, String sheetName,
-                 List<List<String>> head) {
+                 List<List<String>> headerTitles) {
         this.sheetNo = sheetNo;
         this.sheetName = sheetName;
-        this.head = head;
         this.header = new Header(clazz, headLineCnt);
+        this.header.setHeaderTitles(headerTitles);
     }
     
-    public List<List<String>> getHead() {
-        return head;
-    }
-
-    public void setHead(List<List<String>> head) {
-        this.head = head;
-    }
-
     public int getSheetNo() {
         return sheetNo;
     }

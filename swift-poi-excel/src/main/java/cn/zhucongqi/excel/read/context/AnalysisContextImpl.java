@@ -42,7 +42,7 @@ public class AnalysisContextImpl implements AnalysisContext {
 
     private AnalysisEventListener<?> eventListener;
 
-    private Integer currentRowNum;
+    private Integer currentRowIdx;
 
     private Integer totalCount;
 
@@ -127,12 +127,12 @@ public class AnalysisContextImpl implements AnalysisContext {
         this.eventListener = eventListener;
     }
 
-    public Integer getCurrentRowNum() {
-        return this.currentRowNum;
+    public Integer getCurrentRowIdx() {
+        return this.currentRowIdx;
     }
 
-    public void setCurrentRowNum(Integer row) {
-        this.currentRowNum = row;
+    public void setCurrentRowIdx(Integer row) {
+        this.currentRowIdx = row;
     }
 
     public Integer getTotalCount() {

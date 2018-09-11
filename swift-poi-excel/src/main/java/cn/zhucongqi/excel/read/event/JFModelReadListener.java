@@ -69,7 +69,7 @@ public abstract class JFModelReadListener extends AnalysisEventListener<List<Str
 			throw (new GenerateException("Please set read rule first."));
 		}
 		Sheet sheet = context.getCurrentSheet();
-		Integer currentRow = context.getCurrentRowNum();
+		Integer currentRow = context.getCurrentRowIdx();
 		if (sheet.hasHeader() && currentRow <= sheet.getHeaderLineCnt()) {
 			return;
 		}

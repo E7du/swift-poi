@@ -47,7 +47,7 @@ public class Read2007Xlsx {
                     @Override
                     public void invoke(List<String> object, AnalysisContext context) {
                         System.out.println(
-                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowNum()
+                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowIdx()
                                 + " data:" + object);
 
                     }
@@ -79,7 +79,7 @@ public class Read2007Xlsx {
                     @Override
                     public void invoke(ExcelRowJavaModel object, AnalysisContext context) {
                         System.out.println(
-                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowNum()
+                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowIdx()
                                 + " data:" + object);
 
                     }
@@ -112,7 +112,7 @@ public class Read2007Xlsx {
                     @Override
                     public void invoke(List<String> object, AnalysisContext context) {
                         System.out.println(
-                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowNum()
+                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowIdx()
                                 + " data:" + object);
 
                     }
@@ -152,7 +152,7 @@ public class Read2007Xlsx {
                             obj = (ExcelRowJavaModel)object;
                         }
                         System.out.println(
-                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowNum()
+                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowIdx()
                                 + " data:" + obj);
 
                     }
@@ -195,7 +195,7 @@ public class Read2007Xlsx {
                         //    obj = (ExcelRowJavaModel)object;
                         //}
                         System.out.println(
-                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowNum()
+                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowIdx()
                                 + " data:" + obj);
 
                     }
@@ -261,7 +261,7 @@ public class Read2007Xlsx {
                     @Override
                     public void invoke(List<String> object, AnalysisContext context) {
                         System.out.println(
-                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowNum()
+                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowIdx()
                                 + " data:" + object);
                     }
 
@@ -307,7 +307,7 @@ public class Read2007Xlsx {
                             obj = (ExcelRowJavaModel)object;
                         }
                         System.out.println(
-                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowNum()
+                            "当前sheet:" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowIdx()
                                 + " data:" + obj);
                     }
 

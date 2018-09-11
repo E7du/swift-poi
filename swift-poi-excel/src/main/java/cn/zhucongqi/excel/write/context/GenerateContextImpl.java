@@ -102,17 +102,13 @@ public class GenerateContextImpl implements GenerateContext {
                 sheet.getSheetName() != null ? sheet.getSheetName() : sheet.getSheetNo() + "");
             this.currentSheet.setDefaultColumnWidth(20);
             sheetMap.put(sheet.getSheetNo(), this.currentSheet);
-            buildHeader(sheet.getHead(), sheet.getClazz());
+            
+            this.header = sheet.getHeader();
+            
             buildTableStyle(sheet.getTableStyle());
-            if (header != null) {
+            if (sheet.hasHeader()) {
                 appendHeadToExcel();
             }
-        }
-    }
-
-    private void buildHeader(List<List<String>> head, Class<?> clazz) {
-        if (head != null || clazz != null) { 
-        	header = new Header(clazz, head);
         }
     }
 
@@ -132,7 +128,7 @@ public class GenerateContextImpl implements GenerateContext {
             int i = n;
             for (; i < this.header.getRowNum() + n; i++) {
                 Row row = currentSheet.createRow(i);
-                addOneRowOfHeadDataToExcel(row, this.header.getHeadByRowNum(i - n));
+                addOneRowOfHeadDataToExcel(row, this.header.getHeaderByRowIdx(i - n));
             }
         }
     }
@@ -178,7 +174,9 @@ public class GenerateContextImpl implements GenerateContext {
 
     public void buildTable(Table table) {
         if (!tableMap.containsKey(table.getTableNo())) {
-            buildHeader(table.getHead(), table.getClazz());
+        	if (table != null && !table.isNull()) {
+                this.header = new Header(table.getClazz(), table.getHead());
+			}
             tableMap.put(table.getTableNo(), table);
             buildTableStyle(table.getTableStyle());
             if (header != null) {

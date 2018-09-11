@@ -55,7 +55,7 @@ public class Reader {
     /**
      * @param fileName  
      * @param customContent use {@link AnalysisEventListener<?>#invoke(Object, AnalysisContext)
-     *                      }'s AnalysisContext can get this value
+     *                      }'s AnalysisContext can get this value, while read JF Model this param is model 's class.
      * @param eventListener 
      * @param trim :true trim the empty String
      */
@@ -72,7 +72,7 @@ public class Reader {
      * @param in
      * @param excelTypeEnum excel03、07
      * @param customContent use {@link AnalysisEventListener<?>#invoke(Object, AnalysisContext)
-     *                      }'s AnalysisContext can get this value
+     *                      }'s AnalysisContext can get this value, while read JF Model this param is model 's class.
      * @param eventListener
      */
     public Reader(InputStream in, ExcelTypeEnum excelTypeEnum, Object customContent,
@@ -84,7 +84,7 @@ public class Reader {
      * @param in
      * @param excelTypeEnum excel03、07
      * @param customContent use {@link AnalysisEventListener<?>#invoke(Object, AnalysisContext)
-     *                      }'s AnalysisContext can get this value
+     *                      }'s AnalysisContext can get this value, while read JF Model this param is model 's class.
      * @param eventListener
      * @param trim :true trim the empty String
      */

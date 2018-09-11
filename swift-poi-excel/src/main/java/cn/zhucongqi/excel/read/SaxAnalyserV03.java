@@ -64,7 +64,7 @@ public class SaxAnalyserV03 extends BaseSaxAnalyser implements HSSFListener {
         if (analysisContext.getCurrentSheet() == null) {
             this.analyAllSheet = true;
         }
-        context.setCurrentRowNum(0);
+        context.setCurrentRowIdx(0);
         try {
             this.fs = new POIFSFileSystem(analysisContext.getInputStream());
         } catch (IOException e) {
@@ -353,7 +353,7 @@ public class SaxAnalyserV03 extends BaseSaxAnalyser implements HSSFListener {
             if (lastColumnNumber == -1) {
                 lastColumnNumber = 0;
             }
-            analysisContext.setCurrentRowNum(thisRow);
+            analysisContext.setCurrentRowIdx(thisRow);
             Sheet sheet = analysisContext.getCurrentSheet();
 
             if ((sheet == null || sheet.getSheetNo() == sheetIndex) && notAllEmpty) {

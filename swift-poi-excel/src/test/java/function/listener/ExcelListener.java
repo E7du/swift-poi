@@ -52,7 +52,7 @@ public class ExcelListener extends AnalysisEventListener<Object> {
     public void invoke(Object object, AnalysisContext context) {
        // context.interrupt();
 
-        System.out.println("当前表格数" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowNum());
+        System.out.println("当前表格数" + context.getCurrentSheet().getSheetNo() + " 当前行：" + context.getCurrentRowIdx());
         System.out.println(object);
         datas.add(object);//数据存储到list，供批量处理，或后续自己业务逻辑处理。
         List<List<String>> ll = new ArrayList<List<String>>();

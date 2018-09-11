@@ -77,14 +77,14 @@ public interface AnalysisContext {
      *
      * @return 当前行
      */
-    Integer getCurrentRowNum();
+    Integer getCurrentRowIdx();
 
     /**
      * 设置当前行数
      *
-     * @param row 设置行号
+     * @param rowIdx 设置行号
      */
-    void setCurrentRowNum(Integer row);
+    void setCurrentRowIdx(Integer rowIdx);
 
     /**
      * 返回当前sheet共有多少行数据，仅限07版excel

@@ -21,6 +21,7 @@ import java.io.InputStream;
 import org.junit.Test;
 
 import cn.zhucongqi.excel.Reader;
+import cn.zhucongqi.excel.kit.FileKit;
 import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.read.event.AnalysisEventListener;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
@@ -36,7 +37,7 @@ public class XLSX2007FunctionTest extends TestCase {
     //创建没有自定义模型,没有sheet的解析器,默认解析所有sheet解析结果以List<String>的方式通知监听者
     @Test
     public void testExcel2007NoModel() {
-        InputStream inputStream = getInputStream("2007NoModelBigFile.xlsx");
+        InputStream inputStream = FileKit.getInputStream("2007NoModelBigFile.xlsx");
         try {
             // 解析每行结果在listener中处理
             AnalysisEventListener<?> listener = new ExcelListener();
@@ -57,7 +58,7 @@ public class XLSX2007FunctionTest extends TestCase {
     }
     @Test
     public void testExcel2007NoModel2() {
-        InputStream inputStream = getInputStream("test4.xlsx");
+        InputStream inputStream = FileKit.getInputStream("test4.xlsx");
         try {
             // 解析每行结果在listener中处理
             AnalysisEventListener<?> listener = new ExcelListener();
@@ -79,7 +80,7 @@ public class XLSX2007FunctionTest extends TestCase {
     //创建没有自定义模型,但有规定sheet解析器,解析结果以List<String>的方式通知监听者
     @Test
     public void testExcel2007WithSheet() {
-        InputStream inputStream = getInputStream("111.xlsx");
+        InputStream inputStream = FileKit.getInputStream("111.xlsx");
 
         try {
             // 解析每行结果在listener中处理
@@ -102,7 +103,7 @@ public class XLSX2007FunctionTest extends TestCase {
     //创建需要反射映射模型的解析器,解析结果List<Object> Object为自定义的模型
     @Test
     public void testExcel2007WithReflectModel() {
-        InputStream inputStream = getInputStream("2007.xlsx");
+        InputStream inputStream = FileKit.getInputStream("2007.xlsx");
         try {
 
             // 解析每行结果在listener中处理
@@ -125,7 +126,7 @@ public class XLSX2007FunctionTest extends TestCase {
 
     @Test
     public void testExcel2007MultHeadWithReflectModel() {
-        InputStream inputStream = getInputStream("2007_1.xlsx");
+        InputStream inputStream = FileKit.getInputStream("2007_1.xlsx");
 
         try {
 
@@ -145,11 +146,5 @@ public class XLSX2007FunctionTest extends TestCase {
                 e.printStackTrace();
             }
         }
-
-    }
-
-    private InputStream getInputStream(String fileName) {
-        return Thread.currentThread().getContextClassLoader().getResourceAsStream("" + fileName);
-
     }
 }

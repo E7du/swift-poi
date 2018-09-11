@@ -22,6 +22,7 @@ import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.read.context.AnalysisContext;
 import cn.zhucongqi.excel.read.context.AnalysisContextImpl;
 import cn.zhucongqi.excel.read.event.AnalysisEventListener;
+import cn.zhucongqi.excel.read.event.ClassReflectBuildListener;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
 
 /**
@@ -78,6 +79,9 @@ public class ExcelAnalyserImpl implements ExcelAnalyser {
     }
 
     private void appendListeners(BaseSaxAnalyser saxAnalyser) {
+        if (analysisContext.getCurrentSheet() != null && analysisContext.getCurrentSheet().getClazz() != null) {
+            saxAnalyser.appendLister("class_reflect_build_listener", new ClassReflectBuildListener());
+        }
         if (analysisContext.getEventListener() != null) {
             saxAnalyser.appendLister("user_define_listener", analysisContext.getEventListener());
         }

@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import com.test.api.model.User;
 
 import cn.zhucongqi.excel.Writer;
+import cn.zhucongqi.excel.metadata.Header;
 import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
 
@@ -49,9 +50,14 @@ class ExcelWriterDemo {
 		}
 		
 		try {
-			OutputStream out = new FileOutputStream("./src/test/resources/userswrite.xls");
+			OutputStream out = new FileOutputStream("./src/test/resources/userswrite_sh.xls");
 			Writer writer = new Writer(out, ExcelTypeEnum.XLS);
-			writer.write(users, new Sheet(1, 0));
+			
+			Sheet sh = new Sheet(1, 0);
+			Header header = new Header(1, new String[] {"ID", "地址", "姓名"});
+			
+			sh.setHeader(header);
+			writer.write(users, sh);
 			writer.finish();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

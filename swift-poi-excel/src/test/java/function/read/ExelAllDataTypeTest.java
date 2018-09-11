@@ -21,6 +21,7 @@ import java.io.InputStream;
 import org.junit.Test;
 
 import cn.zhucongqi.excel.Reader;
+import cn.zhucongqi.excel.kit.FileKit;
 import cn.zhucongqi.excel.metadata.Sheet;
 import cn.zhucongqi.excel.read.event.AnalysisEventListener;
 import cn.zhucongqi.excel.support.ExcelTypeEnum;
@@ -37,7 +38,7 @@ public class ExelAllDataTypeTest extends TestCase {
     // 创建没有自定义模型,没有sheet的解析器,默认解析所有sheet解析结果以List<String>的方式通知监听者
     @Test
     public void testExcel2007WithReflectModel() {
-        InputStream inputStream = getInputStream("test2.xlsx");
+        InputStream inputStream = FileKit.getInputStream("test2.xlsx");
 
         try {
             // 解析每行结果在listener中处理
@@ -52,11 +53,6 @@ public class ExelAllDataTypeTest extends TestCase {
                 e.printStackTrace();
             }
         }
-
-    }
-
-    private InputStream getInputStream(String fileName) {
-        return Thread.currentThread().getContextClassLoader().getResourceAsStream("" + fileName);
 
     }
 }

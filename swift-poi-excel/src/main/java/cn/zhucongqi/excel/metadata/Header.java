@@ -57,6 +57,16 @@ public class Header {
 		this.headerLineCnt = headerlineCnt;
 	}
 	
+	public Header(Integer headerlineCnt, String[] headerTitle) {
+		this.headerLineCnt = headerlineCnt;
+		this.appendOneHeaderRow(Arrays.asList(headerTitle));
+	}
+	
+	public Header(Integer headerlineCnt, List<String> headerTitle) {
+		this.headerLineCnt = headerlineCnt;
+		this.headerTitles.add(headerTitle);
+	}
+	
 	public Header(Class<?> headClazz, Integer headerLineCnt) {
 		this.headerClazz = headClazz;
 		this.setHeadLineCnt(headerLineCnt);
@@ -200,7 +210,7 @@ public class Header {
 			List<String> columnvalues = headerTitles.get(i);
 			for (int j = 0; j < columnvalues.size(); j++) {
 				int lastRow = getLastRangRow(j, columnvalues.get(j), columnvalues);
-				int lastColumn = getLastRangColumn(columnvalues.get(j), getHeadByRowNum(j), i);
+				int lastColumn = getLastRangColumn(columnvalues.get(j), getHeaderByRowIdx(j), i);
 				if (lastRow >= 0 && lastColumn >= 0 && (lastRow > j || lastColumn > i)) {
 					rangs.add(new CellRange(j, lastRow, i, lastColumn));
 				}
@@ -210,11 +220,11 @@ public class Header {
 		return rangs;
 	}
 
-	public List<String> getHeadByRowNum(int rowNum) {
+	public List<String> getHeaderByRowIdx(Integer rowIdx) {
 		List<String> l = new ArrayList<String>(headerTitles.size());
 		for (List<String> list : headerTitles) {
-			if (list.size() > rowNum) {
-				l.add(list.get(rowNum));
+			if (list.size() > rowIdx) {
+				l.add(list.get(rowIdx));
 			} else {
 				l.add(list.get(list.size() - 1));
 			}
@@ -237,7 +247,6 @@ public class Header {
 	}
 
 	private int getLastRangRow(int j, String value, List<String> columnvalue) {
-
 		if (columnvalue.indexOf(value) < j) {
 			return -1;
 		}
@@ -248,7 +257,7 @@ public class Header {
 		}
 	}
 
-	public int getRowNum() {
+	public Integer getRowNum() {
 		int headRowNum = 0;
 		for (List<String> list : headerTitles) {
 			if (list != null && list.size() > 0) {

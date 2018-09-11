@@ -29,7 +29,7 @@ public class Table {
     /**
      * 对用的表头层级树,用于clazz不确定时候，动态生成表头
      */
-    private List<List<String>> head;
+    private List<List<String>> headerTitles;
 
     /**
      * 第几个table,用于和其他table区分
@@ -62,11 +62,11 @@ public class Table {
     }
 
     public List<List<String>> getHead() {
-        return head;
+        return headerTitles;
     }
 
     public void setHead(List<List<String>> head) {
-        this.head = head;
+        this.headerTitles = head;
     }
 
     public Integer getTableNo() {
@@ -75,5 +75,9 @@ public class Table {
 
     public void setTableNo(Integer tableNo) {
         this.tableNo = tableNo;
+    }
+    
+    public Boolean isNull() {
+    	return this.clazz == null || this.headerTitles == null;
     }
 }

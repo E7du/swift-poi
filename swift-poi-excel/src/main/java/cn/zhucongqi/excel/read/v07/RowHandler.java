@@ -96,7 +96,7 @@ public class RowHandler extends DefaultHandler {
                 curRow = nextRow;
                 // endRow(ROW_TAG);
             }
-            analysisContext.setCurrentRowNum(curRow);
+            analysisContext.setCurrentRowIdx(curRow);
             curCol = PositionKit.getCol(currentCellIndex);
 
             String cellType = attributes.getValue("t");
