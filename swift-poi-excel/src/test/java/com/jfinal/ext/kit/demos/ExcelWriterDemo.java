@@ -44,8 +44,8 @@ class ExcelWriterDemo {
 		for (int i = 0; i < 665; i++) {
 			User u = new User();
 			u.setId(i+3);
-			u.setAddr("addr"+i);
 			u.setName("名字"+i);
+			u.setAddr("addr"+i);
 			users.add(u);
 		}
 		
@@ -54,7 +54,7 @@ class ExcelWriterDemo {
 			Writer writer = new Writer(out, ExcelTypeEnum.XLS);
 			
 			Sheet sh = new Sheet(1, 0);
-			Header header = new Header(1, new String[] {"ID", "地址", "姓名"});
+			Header header = new Header(1, new String[] {"姓名", "ID", "地址"});
 			
 			sh.setHeader(header);
 			writer.write(users, sh);

@@ -53,6 +53,10 @@ public class Header {
 	 */
 	private Map<Integer, Column> headerColumnMap = new HashMap<Integer, Column>();
 	
+	public Header() {
+		
+	}
+	
 	public Header(Integer headerlineCnt) {
 		this.headerLineCnt = headerlineCnt;
 	}
@@ -258,15 +262,15 @@ public class Header {
 	}
 
 	public Integer getRowNum() {
-		int headRowNum = 0;
+		int rowCnt = 0;
 		for (List<String> list : headerTitles) {
 			if (list != null && list.size() > 0) {
-				if (list.size() > headRowNum) {
-					headRowNum = list.size();
+				if (list.size() > rowCnt) {
+					rowCnt = list.size();
 				}
 			}
 		}
-		return headRowNum;
+		return rowCnt;
 	}
 	
 	public Boolean hasHeaderTitles() {

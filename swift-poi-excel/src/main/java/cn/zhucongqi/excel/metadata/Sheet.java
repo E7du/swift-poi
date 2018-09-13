@@ -40,6 +40,7 @@ public class Sheet {
 
     public Sheet(Integer sheetNo) {
         this.sheetNo = sheetNo;
+        this.header = new Header();
     }
 
     public Sheet(Integer sheetNo, Integer headerlineCnt) {
